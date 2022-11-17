@@ -7,8 +7,6 @@ name = "pypi"
 selenium = "*"
 webdriver-manager = "*"
 packaging = "*"
-nose = "*"
-nose2 = "*"
 
 [dev-packages]
 
