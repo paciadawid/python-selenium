@@ -7,9 +7,17 @@ from webdriver_manager.microsoft import EdgeChromiumDriverManager
 
 class BasePage:
 
-    driver = webdriver.Edge(service=EdgeService(EdgeChromiumDriverManager().install()))
-    driver.get("https://automationexercise.com/")
-    driver.implicitly_wait(5)
+    class Webdriver:
+        def __init__(self):
+            self.driver = webdriver.Edge(service=EdgeService(EdgeChromiumDriverManager().install()))
+            self.driver.get("https://automationexercise.com/")
+            self.driver.implicitly_wait(5)
+
+    driver = None
+
+    def __init__(self):
+        if not self.driver:
+            BasePage.driver = BasePage.Webdriver().driver
 
     def click(self, selector: tuple):
         WebDriverWait(self.driver, 10).until(EC.element_to_be_clickable(selector)).click()
