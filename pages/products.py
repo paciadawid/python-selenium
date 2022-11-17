@@ -15,8 +15,9 @@ class ProductsPage(BasePage):
     def navigate_to_product_page(self):
         self.click(self.product_tab_selector)
 
-    def add_item_to_basket(self, name):
+    def add_item_to_basket(self, name, num_of_items=1):
         self.send_keys(self.search_product_selector, name)
         self.click(self.submit_search_button)
-        self.click(self.add_to_cart_selector)
-        self.click(self.continue_shopping)
+        for _ in range(num_of_items):
+            self.click(self.add_to_cart_selector)
+            self.click(self.continue_shopping)

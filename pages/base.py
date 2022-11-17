@@ -5,7 +5,7 @@ from selenium.webdriver.support.wait import WebDriverWait
 from webdriver_manager.microsoft import EdgeChromiumDriverManager
 from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.chrome.service import Service as ChromeService
-
+from selenium.common.exceptions import TimeoutException
 
 class BasePage:
 
@@ -33,3 +33,10 @@ class BasePage:
     def get_elements(self, selector):
         elements = WebDriverWait(self.driver, 10).until(EC.visibility_of_all_elements_located(selector))
         return elements
+
+    def check_if_element_exists(self, selector):
+        try:
+            WebDriverWait(self.driver, 10).until(EC.visibility_of_element_located(selector))
+            return True
+        except TimeoutException:
+            return False
