@@ -11,7 +11,7 @@ class LoginPage(BasePage):
     submit_login_button_selector = (By.XPATH, "//button[@data-qa='login-button']")
 
     def login_with_email_password(self, email, password):
-        self.driver.find_element(*self.login_tab_selector).click()
-        self.driver.find_element(*self.login_field_selector).send_keys(email)
-        self.driver.find_element(*self.password_field_selector).send_keys(password)
-        self.driver.find_element(*self.submit_login_button_selector).click()
+        self.click(self.login_tab_selector)
+        self.send_keys(self.login_field_selector, email)
+        self.send_keys(self.password_field_selector, password)
+        self.click(self.submit_login_button_selector)
